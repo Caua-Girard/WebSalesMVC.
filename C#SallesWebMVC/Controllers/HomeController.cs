@@ -1,4 +1,4 @@
-using C_SallesWebMVC.Models;
+using C_SallesWebMVC.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -15,6 +15,7 @@ namespace C_SallesWebMVC.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Email"] = "Pedro@gmail.com";
             return View();
         }
 

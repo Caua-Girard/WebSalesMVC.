@@ -1,9 +1,10 @@
-namespace C_SallesWebMVC.Models
+namespace C_SallesWebMVC.Models.ViewModel
 {
     public class ErrorViewModel
     {
-        public string? RequestId { get; set; }
-
+        public string? RequestId { get; set; }  
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
     }
 }
+    
