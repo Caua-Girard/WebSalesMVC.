@@ -15,7 +15,7 @@ namespace C_SallesWebMVC.Controllers
 
         public IActionResult Index()
         {
-            ViewData["Email"] = "Pedro@gmail.com";
+    
             return View();
         }
 
