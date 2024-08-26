@@ -1,4 +1,4 @@
-﻿namespace C_SallesWebMVC.wwwroot
+﻿namespace C_SalesWebMVC.wwwroot
 { 
        public static class Configuration
         {

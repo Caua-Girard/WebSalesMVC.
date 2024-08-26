@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using C_SallesWebMVC.Data;
+using C_SalesWebMVC.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+string connectionString = builder.Configuration.GetConnectionString("C_SalesWebMVCContext");
 
-builder.Services.AddDbContext<C_SallesWebMVCContext>(options =>
+builder.Services.AddDbContext<C_SalesWebMVCContext>(options =>
 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("C_SallesWebMVCContext") ?? throw new InvalidOperationException("Connection string 'C_SallesWebMVCContext' not found.")));
+    options.UseMySQL(builder.Configuration.GetConnectionString("C_SalesWebMVCContext") ?? throw new InvalidOperationException("Connection string 'C_SallesWebMVCContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
