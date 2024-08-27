@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using C_SalesWebMVC.Models;
+using C_SallesWebMVC.Models;
 
 namespace C_SalesWebMVC.Data
 {
@@ -15,5 +16,8 @@ namespace C_SalesWebMVC.Data
         }
 
         public DbSet<C_SalesWebMVC.Models.Department> Department { get; set; } = default!;
+        public DbSet <Seller> Seller { get; set; }
+        public DbSet <SalesRecord> SalesRecord { get; set; }
+
     }
 }
