@@ -16,8 +16,8 @@ namespace C_SalesWebMVC.Data
         }
 
         public DbSet<C_SalesWebMVC.Models.Department> Department { get; set; } = default!;
-        public DbSet <Seller> Seller { get; set; }
-        public DbSet <SalesRecord> SalesRecord { get; set; }
+        public DbSet <Seller> Seller { get; set; } = default!;
+        public DbSet<SalesRecord> SalesRecord { get; set; } = default!;
 
     }
 }
