@@ -15,6 +15,7 @@ builder.Services.AddScoped<SeedingService>(); //adiciona o serviço SeedingServi
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,7 +29,7 @@ if (!app.Environment.IsDevelopment())
 app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingService>().Seed(); // realiza a injeção de dependência e executa o serviço de "seeding" de dados
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+    
 app.UseRouting();
 
 app.UseAuthorization();
