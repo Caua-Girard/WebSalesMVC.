@@ -18,6 +18,7 @@ namespace C_SalesWebMVC.Controllers
     
             return View();
         }
+        
 
         public IActionResult Privacy()
         {

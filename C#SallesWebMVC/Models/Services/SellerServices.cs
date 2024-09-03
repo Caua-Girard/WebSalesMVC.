@@ -1,0 +1,22 @@
+﻿using C_SalesWebMVC.Data;
+
+namespace C_SallesWebMVC.Models.Services
+{
+    public class SellerServices
+    {
+
+        private readonly C_SalesWebMVCContext _context;
+        public SellerServices(C_SalesWebMVCContext context)
+        {
+            _context = context;
+        }//dependencia pro DBcontext. (readonly serve para deixar a dependencia inalteravel)
+
+        public List<Seller> FindAll()
+        { 
+            
+            
+            return _context.Seller.ToList();
+        
+        }
+    }
+}

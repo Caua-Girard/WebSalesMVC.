@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using C_SalesWebMVC.Data;
 using C_SallesWebMVC.Data;
+using C_SallesWebMVC.Models.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 string connectionString = builder.Configuration.GetConnectionString("C_SalesWebMVCContext");
@@ -13,6 +13,7 @@ builder.Services.AddDbContext<C_SalesWebMVCContext>(options =>
 
 builder.Services.AddScoped<SeedingService>(); //adiciona o serviço SeedingService ao contêiner de dependências da aplicação com um ciclo de vida do tipo Scoped
 // Add services to the container.
+builder.Services.AddScoped<SellerServices>(); // adiona serviços no container
 builder.Services.AddControllersWithViews();
 
 
@@ -28,7 +29,7 @@ if (!app.Environment.IsDevelopment())
 
 app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingService>().Seed(); // realiza a injeção de dependência e executa o serviço de "seeding" de dados
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles();   
     
 app.UseRouting();
 

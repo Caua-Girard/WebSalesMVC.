@@ -26,8 +26,9 @@ namespace C_SalesWebMVC.Models
             Name = name;
         }
 
-        public void AddSeller(Seller seller)
+        public void AddSeller(Seller seller) 
         {
+
             Sellers.Add(seller);
         }
         public void RemoveSeller(Seller seller)
