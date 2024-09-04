@@ -14,6 +14,7 @@ builder.Services.AddDbContext<C_SalesWebMVCContext>(options =>
 builder.Services.AddScoped<SeedingService>(); //adiciona o serviço SeedingService ao contêiner de dependências da aplicação com um ciclo de vida do tipo Scoped
 // Add services to the container.
 builder.Services.AddScoped<SellerServices>(); // adiona serviços no container
+builder.Services.AddScoped<DepartmentService>();
 builder.Services.AddControllersWithViews();
 
 

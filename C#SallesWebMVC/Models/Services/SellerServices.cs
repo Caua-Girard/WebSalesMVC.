@@ -20,7 +20,7 @@ namespace C_SallesWebMVC.Models.Services
         }
         public void Insert(Seller obj)
         {
-            obj.Department = _context.Department.First();
+            obj.Department = _context.Department.First();//corrige o erro da criação de um vendedor 
             _context.Add(obj);
             _context.SaveChanges();
         }
