@@ -3,6 +3,9 @@ using C_SallesWebMVC.Models.Services;
 using C_SalesWebMVC.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using C_SallesWebMVC.Models.ViewModel;
+using C_SalesWebMVC.Models;
+using C_SallesWebMVC.Models.Services.Exception;
+
 
 
 namespace C_SallesWebMVC.Controllers
@@ -75,9 +78,49 @@ namespace C_SallesWebMVC.Controllers
                 return NotFound();
             }
             return View(obj);
-        
+        }
 
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var obj = _sellerServices.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            List<Department> departments = _departmentService.FindAll();
+            SellerFormViewModel viewModel = new SellerFormViewModel { Seller = obj, Departments = departments };
+            return View(viewModel);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Seller seller)
+        {
+            if (id != seller.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _sellerServices.Upadate(seller);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+
+            }
+            catch  (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }
+
 
