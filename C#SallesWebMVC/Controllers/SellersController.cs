@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using C_SallesWebMVC.Models.ViewModel;
 using C_SalesWebMVC.Models;
 using C_SallesWebMVC.Models.Services.Exception;
+using Microsoft.Identity.Client;
+using System.Diagnostics;
 
 
 
@@ -49,12 +51,12 @@ namespace C_SallesWebMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
-            var obj = _sellerServices.FindById(id.Value);
+            var obj = _sellerServices.FindById(id.Value);   
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
             return View(obj);
         }
@@ -69,13 +71,14 @@ namespace C_SallesWebMVC.Controllers
         public IActionResult Details(int? id)
         {
             if (id == null)
-            {
-                return NotFound();
-            }
+            { 
+                return RedirectToAction(nameof(Error),
+                                        new { message = "Id not provided" });
+        }
             var obj = _sellerServices.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+             return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
             return View(obj);
         }
@@ -84,12 +87,12 @@ namespace C_SallesWebMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
             var obj = _sellerServices.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
 
             List<Department> departments = _departmentService.FindAll();
@@ -103,22 +106,32 @@ namespace C_SallesWebMVC.Controllers
         {
             if (id != seller.Id)
             {
-                return BadRequest();
+              return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
             }
             try
             {
                 _sellerServices.Upadate(seller);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException)
+            catch (NotFoundException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
 
             }
-            catch  (DbConcurrencyException)
+            catch  (DbConcurrencyException e)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
+           
+    }
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }
